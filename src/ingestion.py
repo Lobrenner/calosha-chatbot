@@ -55,8 +55,8 @@ def scrape_regulation(reg_url):
     first_div = soup.find('div', class_='chapter-article')
     chapter_text = first_div.get_text(strip=True, separator='\n')
     subchapter, group, article = chapter_text.split('\n', 2)
-    regulation_content = soup.find_all('hr')[-1] #soup.find('div', class_='co_contentBlock co_section')
-    content = '' #regulation_content.get_text(strip=True, separator='\n')
+    regulation_content = soup.find_all('hr')[-1]
+    content = '' 
     for item in regulation_content.next_siblings:
         content = content + item.get_text()
     content = content.strip()
