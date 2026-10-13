@@ -88,11 +88,9 @@ def main():
     get_group_links(group_set)
     for group in group_set:
         article_set = set()
-        article_set = article_set - group_set
         get_article_links(article_set, group)
         for article in article_set:
             reg_set = set()
-            reg_set = reg_set - article_set
             get_regulation_links(reg_set, article)
             for reg in reg_set:
                 if reg in processed_reg:
@@ -104,7 +102,7 @@ def main():
                     scrape_regulation(reg)
                 except:
                     print("Link could not be parsed correctly")
-                break
+    print("All done :)")
 
 
 # christian was here
