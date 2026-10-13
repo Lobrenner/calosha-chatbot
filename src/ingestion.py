@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import json
 import time
 import re
+import os
 
 def get_group_links(group_set):
     '''Get links to groups in subchapter 7 of Title 8, California Code of Regulations'''
@@ -69,8 +70,10 @@ def scrape_regulation(reg_url):
         "content": content
     }
 
-    path = 'data/regulations/' + section + '.json'
-    with open(path, 'w', encoding='utf-8') as f:
+    name = 'data/regulations/' + section + '.json'
+    if os.path.exists(name):
+        return
+    with open(name, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 
