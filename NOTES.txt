@@ -1,0 +1,3 @@
+scraoer needs to be able handle iomages and tables better
+some regulations contain just a note and no actula regulatory information
+some grammatical errors are in the original text, fix somehow

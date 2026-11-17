@@ -147,6 +147,7 @@ def scrape_regulation(reg_url):
 
 
 def main():
+
     processed_reg = set()
     reg_set = set()
     get_regulation_links(reg_set, "https://www.dir.ca.gov/Title8/sb7g2a7.html")
@@ -161,7 +162,7 @@ def main():
         except:
             print("Link could not be parsed correctly")
     print("All done :)")
-    
+
     
 if __name__ == "__main__":
     main()
