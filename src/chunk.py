@@ -29,7 +29,7 @@ for item in folder.iterdir():
 
         chunk_doc = Document (
             page_content= chunk,
-            metadata= {"source_url": data['source_url'], "section": data['section'],"title": data['title'], "subchapter": data['subchapter'], "group": data['group'], "article": data['article'], "chunk_index": index, "identity": data['section'] + "_" + str(index)}
+            metadata= {"source_url": data['source_url'], "section": data['section'],"title": data['title'], "subchapter": data['subchapter'], "group": data['group'], "article": data['article'], "chunk_index": index, "identity": item.stem + "_" + str(index)}
         )
         chunks[index] = chunk_doc
     reg_chunks.extend(chunks)
