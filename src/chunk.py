@@ -4,8 +4,8 @@ from langchain_text_splitters import CharacterTextSplitter
 from pathlib import Path
 from langchain_core.documents import Document
 
-with open("data/test/3314.json", 'r', encoding='utf-8') as file:
-    data = json.load(file)
+
+#make chunks of ~1000 characters to the nearest space character, each chnk has 200 characters of overlap
 
 text_splitter = CharacterTextSplitter(
     chunk_size=1000,
@@ -13,19 +13,25 @@ text_splitter = CharacterTextSplitter(
     separator=" "
 )
 
+folder = Path("data/test")
 
-chunks = text_splitter.split_text(data["content"])
+reg_chunks = []
 
+for item in folder.iterdir():
+    with open(item, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+   
+    #make list of chunks
+    chunks = text_splitter.split_text(data["content"])
 
-for index, chunk in enumerate(chunks):
+    # iterate through list of chunks and add metadata to each one
+    for index, chunk in enumerate(chunks):
 
-    chunk_doc = Document (
-        page_content= chunk,
-        metadata= {"source_url": data['source_url'], "section": data['section'],"title": data['title'], "subchapter": data['subchapter'], "group": data['group'], "article": data['article'], "chunk_index": index}
-    )
-    chunks[index] = chunk_doc
+        chunk_doc = Document (
+            page_content= chunk,
+            metadata= {"source_url": data['source_url'], "section": data['section'],"title": data['title'], "subchapter": data['subchapter'], "group": data['group'], "article": data['article'], "chunk_index": index, "identity": data['section'] + "_" + str(index)}
+        )
+        chunks[index] = chunk_doc
+    reg_chunks.extend(chunks)
 
-
-print(chunks[0])
-print("\n\n\n")
-print(chunks[1])
+print(reg_chunks)
