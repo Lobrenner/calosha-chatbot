@@ -1,3 +1,5 @@
+#.\.venv\Scripts\Activate.ps1
+
 
 import requests
 from bs4 import BeautifulSoup, Tag, NavigableString
@@ -19,8 +21,7 @@ def get_soup(url):
     response = requests.get(url, timeout=30)
     response.raise_for_status()
 
-    # Parse the original bytes so BeautifulSoup can detect
-    # the encoding, including encodings specified in HTML.
+    # Parse the original bytes so BeautifulSoup can detect the encoding, including encodings specified in HTML.
     return BeautifulSoup(response.content, "html.parser")
 
 
